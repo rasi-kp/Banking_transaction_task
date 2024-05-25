@@ -1,10 +1,6 @@
-Sure, here's a README file for your completed banking software project, including both backend and frontend aspects:
-
----
-
 # Banking Software Project
 
-This project is a comprehensive banking software system, comprising both backend and frontend components. It allows users to manage their accounts, perform transactions, and view account details. Administrators can manage user accounts, including blocking and unblocking users.
+This project is a comprehensive banking simple software system, comprising both backend and frontend components. It allows users to manage their accounts, perform transactions, and view account details. Administrators can manage user accounts, including blocking and unblocking users.
 
 ## Table of Contents
 
@@ -23,7 +19,7 @@ This project is a comprehensive banking software system, comprising both backend
 - User authentication and authorization
 - Account management
 - Deposit and withdrawal transactions
-- Balance inquiry
+- Available Balance
 - User management (admin functionality)
 - Block and unblock users
 
@@ -47,8 +43,8 @@ This project is a comprehensive banking software system, comprising both backend
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/yourusername/banking-software.git
-    cd banking-software/backend
+    git clone https://github.com/rasi-kp/Banking_transaction_task.git
+    cd Banking_transaction_task/backend
     ```
 
 2. **Install dependencies:**
@@ -62,9 +58,11 @@ This project is a comprehensive banking software system, comprising both backend
     Create a `.env` file in the `backend` directory and add the following:
 
     ```env
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret_key
-    PORT=5000
+    DATABASE_URL=mongodb+srv://rasi:rafasafa@cluster0.twyt6la.mongodb.net/bank?retryWrites=true&w=majority
+
+    JWT_SECRET='rasi_secret_key'
+
+    JWT_SECRET_ADMIN='rasi_secret_key_admin'
     ```
 
 4. **Run the backend server:**
@@ -73,7 +71,7 @@ This project is a comprehensive banking software system, comprising both backend
     npm start
     ```
 
-    The backend server should now be running on `http://localhost:5000`.
+    The backend server should now be running on `http://localhost:3000`.
 
 ### Frontend
 
@@ -89,21 +87,13 @@ This project is a comprehensive banking software system, comprising both backend
     npm install
     ```
 
-3. **Set up environment variables:**
-
-    Create a `.env` file in the `frontend` directory and add the following:
-
-    ```env
-    REACT_APP_API_URL=http://localhost:5000
-    ```
-
-4. **Run the frontend application:**
+3. **Run the frontend application:**
 
     ```sh
     npm start
     ```
 
-    The frontend application should now be running on `http://localhost:3000`.
+    The frontend application should now be running on `http://localhost:3001`.
 
 ## Usage
 
@@ -115,41 +105,18 @@ This project is a comprehensive banking software system, comprising both backend
 
 ## API Endpoints
 
-### Authentication
-- `POST /api/auth/register`: Register a new user
-- `POST /api/auth/login`: Log in a user
+### Authentication USser
+- `POST /createUser`: Register a new user
+- `POST /loginUser`: Log in a user
 
-### User
-- `GET /api/users`: Get all users (admin only)
-- `PUT /api/users/:id/block`: Block a user (admin only)
-- `PUT /api/users/:id/unblock`: Unblock a user (admin only)
+### Transaction
+- `GET /transaction`: all transaction
+- `POST /transaction`: new Transaction
+- `GET /transaction/:id`: each transaction details
+- 
+### Admin
+- `GET /admin/login`: Admin Login
+- `GET /admin/allusers`: Get all users (admin only)
+- `GET /admin/block/:id`: Block a user (admin only)
+- `GET /admin/unblock/:id`: Unblock a user (admin only)
 
-### Accounts
-- `GET /api/accounts`: Get all accounts for logged in user
-- `POST /api/accounts`: Create a new account
-- `GET /api/accounts/:id`: Get account details
-- `PUT /api/accounts/:id`: Update account details
-- `DELETE /api/accounts/:id`: Delete an account
-
-### Transactions
-- `POST /api/transactions/deposit`: Make a deposit
-- `POST /api/transactions/withdraw`: Make a withdrawal
-- `GET /api/transactions`: Get all transactions for logged in user
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/YourFeature`)
-3. Commit your changes (`git commit -m 'Add some feature'`)
-4. Push to the branch (`git push origin feature/YourFeature`)
-5. Open a pull request
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to modify any sections as per your project's specifics.
