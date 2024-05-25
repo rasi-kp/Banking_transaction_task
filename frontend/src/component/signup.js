@@ -1,6 +1,7 @@
 // src/Components/Login.js
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -48,7 +49,7 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/createUser', {
+      const response = await fetch('http://localhost:3000/createUser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,17 +64,15 @@ const Signup = () => {
         throw new Error('Failed to sign in');
       }
       const data = await response.json();
-      console.log(data);
-      if (data.success === 'success') {
-        // Handle successful sign-in
-        alert('Sign in successful');
-        // Redirect the user or perform other actions
+      if (data.success) {
+        toast.success('Successfully Created Account', { autoClose: 3000 }); // Show for 3 seconds
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
       }
-      if (data.error === 'Invalid username') {
-        setError("Invalied Email")
-      }
-      if (data.error === 'Invalid password') {
-        setPerror("Invalied Password")
+      if (data.error) {
+        toast.error(data.error)
+        setError(data.error)
       }
     } catch (error) {
       alert(error.message)
@@ -145,6 +144,7 @@ const Signup = () => {
           <Link to='/' className="text-red-600 hover:underline hover:underline-offset-4">Login</Link>
         </div>
       </div>
+      <ToastContainer/>
     </section>
   );
 };

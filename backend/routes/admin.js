@@ -6,7 +6,7 @@ const {blockuser,unblockuser, alluser, loginAdmin, deleteTransaction}=require('.
 router.get('/', function(req, res, next) {
   res.send("success")
 });
-router.get('/login',loginAdmin)
+router.post('/login',loginAdmin)
 router.get('/allusers',isAuthadmin,alluser)
 router.get('/block/:id',isAuthadmin,blockuser)
 router.get('/unblock/:id',isAuthadmin,unblockuser)

@@ -10,7 +10,7 @@ import { useUser } from "../context/usercontext";
 
 const Login = () => {
   const navigate=useNavigate()
-  const {userRole, user,loginUser } = useUser();
+  const {userRole, user, loginUser } = useUser();
   const [username,setUsername]=useState("")
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
@@ -20,9 +20,7 @@ const Login = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      if (userRole === 'Admin') {
-        navigate('/admin',{ state: { username: userRole }})
-      } else {
+      {
         navigate('/home',{ state: { username: userRole }});
       }
     }
@@ -51,7 +49,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/loginUser', {
+      const response = await fetch('http://localhost:3000/loginUser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,13 +65,6 @@ const Login = () => {
       const data = await response.json();
       if (data.token) {
         localStorage.setItem('token', data.token);
-        // localStorage.setItem('user', data.user);
-        if (data.success === 'admin') {
-          // setUsername(data.user)
-          loginUser(data.user);
-          alert('Admin Login Success');
-          navigate('/admin',{ state: { username: data.user } })
-        }
         if (data.success === 'success') {
           setUsername(data.user)
           loginUser(data.user);

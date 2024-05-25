@@ -1,4 +1,6 @@
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../model/users')
 const user = require('../model/users')
 const Admin=require('../model/admin')
@@ -16,7 +18,7 @@ module.exports = {
         const passwordmatch = await bcrypt.compare(req.body.password, admin.password)
         if (passwordmatch) {
           const token = jwt.sign({ email: admin.email, id:admin._id }, process.env.JWT_SECRET_ADMIN, { expiresIn: '1h' });
-            return res.json({ token, success: "success", user: usercheck.name });
+            return res.status(200).json({ token, success: "success", user: admin.name });
         }
         else {
           return res.status(400).json({ error: "Invalid password" });
@@ -27,17 +29,17 @@ module.exports = {
     }
   },
   alluser: async (req, res) => {
-    const datas = await User.findOne({})
+    const datas = await User.find({})
     res.status(200).json(datas)
   },
   blockuser: async (req, res) => {
     const proid = req.params.id
-    await user.updateOne({ _id: proid }, { $set: { isActive: false } })
+    await user.updateOne({ email: proid }, { $set: { isActive: false } })
     res.status(200).json("block")
   },
   unblockuser: async (req, res) => {
     const proid = req.params.id
-    await user.updateOne({ _id: proid }, { $set: { isActive: true } })
+    await user.updateOne({ email: proid }, { $set: { isActive: true } })
     res.status(200).json("unblock")
   },
   // Delete a transaction

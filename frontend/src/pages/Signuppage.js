@@ -5,7 +5,7 @@ import  Navbar  from '../component/Navbar'
 function Signuppage() {
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Signup/>
     </div>
   )

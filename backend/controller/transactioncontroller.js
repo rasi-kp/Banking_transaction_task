@@ -28,7 +28,7 @@ const createTransaction = async (req, res) => {
     if (!user) {
       await session.abortTransaction();
       session.endSession();
-      return res.status(404).json({ msg: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
 
     if (type === 'withdrawal' && user.balance < amountNumber) {
@@ -53,8 +53,7 @@ const createTransaction = async (req, res) => {
     await user.save({ session });
     await session.commitTransaction();
     session.endSession();
-
-    res.status(201).json(transaction);
+    res.status(201).json({success:"success"});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

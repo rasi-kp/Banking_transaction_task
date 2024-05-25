@@ -46,7 +46,7 @@ module.exports = {
       const hashpassword = await bcrypt.hash(req.body.password, saltRounds)
       datas.password = hashpassword
       const result = await collection.insertOne(datas)
-      return res.status(200).json({ user: datas.name });
+      return res.status(200).json({ user: datas.name,success:"success" });
     }
   },
 }
