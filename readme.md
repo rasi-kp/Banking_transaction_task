@@ -14,6 +14,12 @@ This project is a comprehensive banking simple software system, comprising both 
 6. [Contributing](#contributing)
 7. [License](#license)
 
+![mobile (1)](https://github.com/rasi-kp/Banking_transaction_task/assets/107319917/ba531461-4837-45a5-89f2-824297faca24)
+
+![mobile (2) (1)](https://github.com/rasi-kp/Banking_transaction_task/assets/107319917/e6dec933-d84f-44a7-b9a0-c1c3a28a131d)
+
+
+
 ## Features
 
 - User authentication and authorization
